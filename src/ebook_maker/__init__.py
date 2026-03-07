@@ -1,2 +1,3 @@
-def main() -> None:
-    print("Hello from ebook-maker!")
+from ebook_maker.main import main
+
+__all__ = ["main"]

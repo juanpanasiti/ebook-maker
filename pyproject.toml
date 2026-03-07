@@ -23,6 +23,10 @@ ebook-maker = "ebook_maker:main"
 requires = ["uv_build>=0.10.0,<0.11.0"]
 build-backend = "uv_build"
 
+[tool.uv-build]
+data-files = {}
+module-data = { "ebook_maker" = ["assets/*.css", "assets/*.lua"] }
+
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
