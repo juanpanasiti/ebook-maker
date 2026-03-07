@@ -1,0 +1,107 @@
+/* BASE CONFIGURATION */
+body {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  word-wrap: break-word;
+}
+
+/* PARAGRAPHS AND INDENTATION */
+p {
+  text-indent: 1.5em !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* No indentation after headings or inside lists */
+h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p, li > p {
+  text-indent: 0 !important;
+}
+
+/* HEADINGS */
+h1 {
+  page-break-before: always; /* Force page break before each h1 */
+  margin-top: 1.5em;
+}
+h1, h2, h3, h4 {
+  page-break-after: avoid; /* Prevent heading from being alone at the bottom of a page */
+}
+
+/* BLOCKQUOTES AND CALLOUTS (Pandoc converts callouts to blockquotes by default) */
+blockquote {
+  margin: 1em 1.5em;
+  padding-left: 1em;
+  border-left: 3px solid #555;
+  font-style: italic;
+  font-size: 0.95em;
+}
+
+/* LISTS */
+ul, ol {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 2em;
+}
+
+/* CODE */
+code {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  -moz-hyphens: none !important;
+}
+
+pre {
+  background-color: #f6f6f6 !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px;
+  padding: 0.8em 1em !important;
+  margin: 1.2em 0 !important;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.82em;
+  line-height: 1.6;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  word-break: normal !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  -moz-hyphens: none !important;
+}
+
+/* Line number (injected by the Pandoc Lua filter) */
+pre code span.line-number {
+  display: inline-block;
+  min-width: 2.5em;
+  padding-right: 0.8em;
+  text-align: right;
+  color: #999;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* TABLES */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  page-break-inside: avoid;
+  font-size: 0.8em; /* Smaller font to accommodate wide tables */
+}
+th, td {
+  border: 1px solid #777;
+  padding: 0.4em;
+  text-align: left;
+}
+th {
+  background-color: #e2e2e2;
+  font-weight: bold;
+}
+
+/* IMAGES */
+img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 1em auto;
+}

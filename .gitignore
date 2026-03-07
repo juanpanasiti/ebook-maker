@@ -9,3 +9,9 @@ wheels/
 # Virtual environments
 .venv
 .python-version
+
+# Secrets en envs
+.env
+
+# Coverage
+.coverage
