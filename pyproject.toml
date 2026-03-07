@@ -1,7 +1,7 @@
 [project]
 name = "ebook-maker"
 version = "0.1.0"
-description = "Add your description here"
+description = "EPUB generator from Markdown files"
 readme = "README.md"
 authors = [
     { name = "Juan Marcelo Panasiti", email = "juanpanasiti@gmail.com" }
