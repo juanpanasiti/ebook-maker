@@ -39,7 +39,7 @@ def test_generate_epub_success(mock_write, mock_pandoc, tmp_path):
     # Call the generator
     out_path = generate_epub(note, output_dir)
     
-    assert out_path == output_dir / "A_title.epub"
+    assert out_path == output_dir / "A title.epub"
     
     # Date should be automatically updated to today
     today_str = datetime.now().strftime("%Y-%m-%d")

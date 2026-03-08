@@ -24,7 +24,7 @@ def generate_epub(note: Note, output_dir: Path) -> Path:
     if not md_files:
         raise ValueError(f"No markdown files found in the note '{note.metadata.title}'. Cannot generate EPUB.")
 
-    output_filename = f"{note.metadata.title}.epub".replace(" ", "_")
+    output_filename = f"{note.metadata.title}.epub"
     output_path = output_dir / output_filename
 
     # 3. Construct extra arguments for pandoc from metadata
