@@ -22,7 +22,7 @@ def main():
         settings = get_settings()
     except Exception as e:
         console.print("[bold red]Configuration Error:[/bold red]")
-        console.print(f"Please ensure you have a valid .env file. Details:\n{e}")
+        console.print(f"Please ensure you have a valid .env file at ~/.config/ebook-maker/.env or in the current directory. Details:\n{e}")
         sys.exit(1)
 
     with console.status("[bold cyan]Scanning Obsidian vault for notes...[/bold cyan]", spinner="dots"):
