@@ -80,6 +80,15 @@ pre code span.line-number {
   user-select: none;
 }
 
+/* TABLE OF CONTENTS */
+nav#TOC ol, nav#TOC ul {
+  list-style-type: none;
+  padding-left: 1em;
+}
+nav#TOC > ol, nav#TOC > ul {
+  padding-left: 0;
+}
+
 /* TABLES */
 table {
   width: 100%;
