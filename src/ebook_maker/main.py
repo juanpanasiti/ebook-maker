@@ -12,7 +12,7 @@ from ebook_maker.ui.menu import (
     display_note_metadata,
     prompt_edit_metadata
 )
-from ebook_maker.converter.converter import generate_epub
+from ebook_maker.converter.converter import generate_epub, get_epub_output_filename
 from ebook_maker.sender.email_sender import send_epub_to_kindle
 
 
@@ -68,7 +68,7 @@ def main():
         selected = prompt_select_note(entries, show_back=len(nav_stack) > 1)
 
         if not selected or selected == "exit":
-            console.print("[dim]Operation cancelled by the user.[/dim]")
+            console.clear()
             sys.exit(0)
 
         if selected == "back":
@@ -95,7 +95,7 @@ def main():
             
             elif action == "open_location":
                 import subprocess
-                epub_path = settings.epub_destination / f"{selected_note.metadata.title}.epub"
+                epub_path = settings.epub_destination / get_epub_output_filename(selected_note)
                 subprocess.Popen(["xdg-open", str(epub_path.parent)])
                 console.print(f"📂 [bold green]Opened:[/bold green] {epub_path.parent}\n")
 
@@ -129,7 +129,7 @@ def main():
             elif action == "send":
                 try:
                     # Construct expected output path
-                    output_filename = f"{selected_note.metadata.title}.epub"
+                    output_filename = get_epub_output_filename(selected_note)
                     output_path = settings.epub_destination / output_filename
                     
                     if not output_path.exists():

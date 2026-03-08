@@ -14,6 +14,7 @@ class NoteMetadata(BaseModel):
     date: Optional[str] = Field(default=None, description="Creation or publication date")
     identifier: Optional[str] = Field(default=None, description="ISBN or UUID")
     cover_image: Optional[str] = Field(default=None, description="Path to the cover image")
+    finished: bool = Field(default=False, description="Whether the note is finalized for publishing")
 
 
 class Note(BaseModel):

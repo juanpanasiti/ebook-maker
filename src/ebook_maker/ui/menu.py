@@ -4,6 +4,7 @@ from typing import Optional
 import questionary
 
 from ebook_maker.core.models import Folder, Note, NoteMetadata, VaultEntry
+from ebook_maker.converter.converter import get_epub_output_filename
 from ebook_maker.core.settings import Settings
 from ebook_maker.scanner.scanner import write_metadata
 from ebook_maker.ui.console import console
@@ -94,7 +95,7 @@ def prompt_note_action(note: Note, settings: Settings) -> Optional[str]:
     ]
 
     # Only show 'Open location' if the EPUB file exists
-    epub_path = settings.epub_destination / f"{note.metadata.title}.epub"
+    epub_path = settings.epub_destination / get_epub_output_filename(note)
     if epub_path.exists():
         choices.append(questionary.Choice("📂 Open EPUB Location", "open_location"))
 
@@ -128,6 +129,7 @@ def display_note_metadata(note: Note) -> None:
     table.add_row("Identifier (UUID/ISBN)", note.metadata.identifier if note.metadata.identifier else "[dim]None[/dim]")
     table.add_row("Description", note.metadata.description if note.metadata.description else "[dim]None[/dim]")
     table.add_row("Cover Image", note.metadata.cover_image if note.metadata.cover_image else "[dim]None[/dim]")
+    table.add_row("Finished", "Yes" if note.metadata.finished else "No")
     table.add_row("Markdown Files", str(len(note.markdown_files)))
 
     console.print()
@@ -146,6 +148,7 @@ def prompt_edit_metadata(note: Note) -> None:
             questionary.Choice(f"Description: {note.metadata.description or 'None'}", "description"),
             questionary.Choice(f"Identifier: {note.metadata.identifier or 'None'}", "identifier"),
             questionary.Choice(f"Cover Image: {note.metadata.cover_image or 'None'}", "cover_image"),
+            questionary.Choice(f"Finished: {'Yes' if note.metadata.finished else 'No'}", "finished"),
             questionary.Choice("🔙 Back", "back"),
         ]
 
@@ -191,6 +194,10 @@ def prompt_edit_metadata(note: Note) -> None:
             new_val = questionary.text("Cover Image Path (optional):", default=current_cover).ask()
             if new_val is not None:
                 note.metadata.cover_image = new_val if new_val.strip() else None
+        elif choice == "finished":
+            new_val = questionary.confirm("Is this note finished?", default=note.metadata.finished).ask()
+            if new_val is not None:
+                note.metadata.finished = new_val
 
         # Save to disk after every change
         metadata_path = note.path / "metadata.json"

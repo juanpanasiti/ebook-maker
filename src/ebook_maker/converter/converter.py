@@ -8,6 +8,12 @@ import ebook_maker
 from ebook_maker.core.models import Note
 from ebook_maker.scanner.scanner import write_metadata
 
+
+def get_epub_output_filename(note: Note) -> str:
+    """Build output filename, prefixing draft notes for easy identification."""
+    prefix = "" if note.metadata.finished else "[DRAFT] "
+    return f"{prefix}{note.metadata.title}.epub"
+
 def generate_epub(note: Note, output_dir: Path) -> Path:
     """
     Generates an EPUB from the provided Note object and saves it in output_dir.
@@ -24,7 +30,7 @@ def generate_epub(note: Note, output_dir: Path) -> Path:
     if not md_files:
         raise ValueError(f"No markdown files found in the note '{note.metadata.title}'. Cannot generate EPUB.")
 
-    output_filename = f"{note.metadata.title}.epub"
+    output_filename = get_epub_output_filename(note)
     output_path = output_dir / output_filename
 
     # 3. Construct extra arguments for pandoc from metadata

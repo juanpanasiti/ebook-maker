@@ -29,7 +29,8 @@ def test_generate_epub_success(mock_write, mock_pandoc, tmp_path):
             publisher="My Publisher",
             description="A test description",
             identifier="test-identifier",
-            cover_image="cover.png"
+            cover_image="cover.png",
+            finished=True,
         )
     )
 
@@ -96,3 +97,25 @@ def test_generate_epub_pandoc_failure(mock_write, mock_pandoc, tmp_path):
 
     with pytest.raises(RuntimeError, match="Pandoc conversion failed: Pandoc error"):
         generate_epub(note, output_dir)
+
+
+@patch("ebook_maker.converter.converter.pypandoc.convert_file")
+@patch("ebook_maker.converter.converter.write_metadata")
+def test_generate_epub_adds_draft_prefix_when_not_finished(mock_write, mock_pandoc, tmp_path):
+    note_dir = tmp_path / "book"
+    note_dir.mkdir()
+    (note_dir / "chapter.md").write_text("Hello")
+
+    note = Note(
+        path=note_dir,
+        metadata=NoteMetadata(
+            title="My Course",
+            finished=False,
+        ),
+    )
+
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
+
+    out_path = generate_epub(note, output_dir)
+    assert out_path == output_dir / "[DRAFT] My Course.epub"

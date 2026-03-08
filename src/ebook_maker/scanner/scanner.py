@@ -89,6 +89,9 @@ def process_note_directory(directory: Path, default_author: str = "Unknown Autho
                     
                 if data.get("language") is None:
                     data["language"] = "es"
+
+                if data.get("finished") is None:
+                    data["finished"] = False
                 
                 # If cover image is missing/null in metadata, check if a default file exists
                 if data.get("cover_image") is None and default_cover:
