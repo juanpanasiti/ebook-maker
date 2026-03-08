@@ -5,6 +5,7 @@ Ebook Maker is a terminal application built in Python that converts Obsidian not
 ## Features
 
 - **Obsidian Vault Scanning**: Automatically scans a directory for folders containing Markdown (`.md`) files and recognizes them as individual notes/books.
+- **Hierarchical Navigation**: Supports nested folder structures. Folders that don't contain Markdown files but have notes deeper in their hierarchy are displayed as navigable folders in the menu, letting you drill down into subcategories.
 - **Metadata Management**: Generates and manages `metadata.json` for each note, including title, author(s), publisher, language, description, cover image, and more.
 - **Auto Cover Detection**: If a `cover.png` or `cover.jpg` file exists in a note's directory, it is automatically used as the EPUB cover image.
 - **Default Author & Publisher**: Configurable default values via environment variables so you don't need to set them for every note.
@@ -16,6 +17,7 @@ Ebook Maker is a terminal application built in Python that converts Obsidian not
 - **Send to Kindle**: Optionally send the generated EPUB directly to your Kindle device via email (SMTP), with Gmail App Password support.
 - **Interactive UI**: A rich terminal interface with menus, colors, emojis, and loading animations powered by [Rich](https://github.com/Textualize/rich) and [Questionary](https://github.com/tmbo/questionary).
 - **Pydantic Validation**: All configuration and metadata is validated using Pydantic models.
+- **Global Installation**: Install once with `uv tool install .` and run from anywhere in your system.
 
 ## Prerequisites
 
@@ -28,6 +30,7 @@ Ebook Maker is a terminal application built in Python that converts Obsidian not
    ```bash
    ./install.sh
    ```
+   This will install `ebook-maker` as a global CLI tool and copy your `.env` configuration to `~/.config/ebook-maker/.env`, so it works from any directory.
 
 2. Copy the example configuration file and adjust it to your paths:
    ```bash
@@ -50,10 +53,23 @@ Ebook Maker is a terminal application built in Python that converts Obsidian not
    SMTP_PASSWORD="your_gmail_app_password"
    ```
 
+4. Run the installer again to apply the configuration globally:
+   ```bash
+   ./install.sh
+   ```
+
+   > **Note:** The app looks for `.env` files in two locations (in order): `~/.config/ebook-maker/.env` (global) and `.env` in the current directory (overrides global). This means you can override settings per-project if needed.
+
    > **Note:** To use the Send to Kindle feature with Gmail, you need to generate an [App Password](https://support.google.com/accounts/answer/185833) and add your Gmail address to the [Approved Personal Document E-mail List](https://www.amazon.com/hz/mycd/myx#/home/settings/payment) in your Amazon account settings.
 
 ## Running the App
 
+Once installed, you can run it from anywhere:
+```bash
+ebook-maker
+```
+
+Or from the project directory using the dev script:
 ```bash
 ./run.sh
 ```

@@ -27,3 +27,12 @@ class Note(BaseModel):
         # Simple sorting by name to ensure consistent ordering when pandoc compiles
         # If files start with numbers (e.g. 01-Intro.md, 02-Chapter.md), this works nicely.
         return sorted([f for f in self.path.iterdir() if f.is_file() and f.suffix == ".md"])
+
+
+class Folder(BaseModel):
+    """Represents a subfolder that contains notes deeper in its hierarchy."""
+    path: Path = Field(description="The absolute path to the folder")
+    name: str = Field(description="The display name of the folder")
+
+
+VaultEntry = Note | Folder

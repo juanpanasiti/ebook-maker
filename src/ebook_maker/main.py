@@ -1,7 +1,8 @@
 import sys
 
 from ebook_maker.core.settings import get_settings
-from ebook_maker.scanner.scanner import scan_vault
+from ebook_maker.core.models import Folder
+from ebook_maker.scanner.scanner import scan_vault, scan_directory
 from ebook_maker.ui.console import console
 from ebook_maker.ui.menu import (
     display_no_notes_found, 
@@ -38,12 +39,40 @@ def main():
     # Inform user how many were found
     console.print(f"✅ Found [bold green]{len(notes)}[/bold green] note(s).\n")
 
-    while True:
-        selected_note = prompt_select_note(notes)
+    # Navigation stack for hierarchical folder browsing
+    nav_stack: list = [settings.obsidian_root]
 
-        if not selected_note or selected_note == "exit":
+    while True:
+        current_dir = nav_stack[-1]
+        entries = scan_directory(
+            current_dir,
+            default_author=settings.default_author,
+            default_publisher=settings.default_publisher
+        )
+
+        if not entries:
+            if len(nav_stack) == 1:
+                display_no_notes_found()
+            else:
+                console.print("[dim]No notes found in this folder. Going back...[/dim]")
+                nav_stack.pop()
+                continue
+
+        selected = prompt_select_note(entries, show_back=len(nav_stack) > 1)
+
+        if not selected or selected == "exit":
             console.print("[dim]Operation cancelled by the user.[/dim]")
             sys.exit(0)
+
+        if selected == "back":
+            nav_stack.pop()
+            continue
+
+        if isinstance(selected, Folder):
+            nav_stack.append(selected.path)
+            continue
+
+        selected_note = selected
 
         while True:
             action = prompt_note_action(selected_note, settings)

@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 
-from ebook_maker.core.models import NoteMetadata
-from ebook_maker.scanner.scanner import scan_vault
+from ebook_maker.core.models import Folder, Note, NoteMetadata
+from ebook_maker.scanner.scanner import scan_vault, scan_directory
 
 
 def test_scan_vault_finds_notes(tmp_path):
@@ -140,3 +140,98 @@ def test_scan_vault_detects_default_cover_and_author(tmp_path):
     assert note.metadata.author == "Test Author"
     # Should automatically link to cover.png
     assert note.metadata.cover_image == "cover.png"
+
+
+def test_scan_directory_returns_notes_and_folders(tmp_path):
+    """Test that scan_directory returns Notes for dirs with .md and Folders for dirs with nested notes."""
+    root = tmp_path / "vault"
+    root.mkdir()
+
+    # A: has .md files → Note
+    a = root / "A"
+    a.mkdir()
+    (a / "chapter.md").write_text("# A")
+
+    # B: has .md files → Note
+    b = root / "B"
+    b.mkdir()
+    (b / "chapter.md").write_text("# B")
+
+    # C: no .md, but has subfolders with .md → Folder
+    c = root / "C"
+    c.mkdir()
+    d = c / "D"
+    d.mkdir()
+    (d / "chapter.md").write_text("# D")
+
+    entries = scan_directory(root)
+
+    assert len(entries) == 3
+    assert isinstance(entries[0], Note)  # A
+    assert isinstance(entries[1], Note)  # B
+    assert isinstance(entries[2], Folder)  # C
+    assert entries[2].name == "C"
+
+
+def test_scan_directory_ignores_empty_dirs(tmp_path):
+    """Test that directories without notes anywhere below are skipped."""
+    root = tmp_path / "vault"
+    root.mkdir()
+
+    note_dir = root / "Book"
+    note_dir.mkdir()
+    (note_dir / "chapter.md").write_text("# Book")
+
+    empty_dir = root / "Empty"
+    empty_dir.mkdir()
+
+    entries = scan_directory(root)
+
+    assert len(entries) == 1
+    assert isinstance(entries[0], Note)
+
+
+def test_scan_directory_ignores_hidden_dirs(tmp_path):
+    """Test that hidden directories are skipped."""
+    root = tmp_path / "vault"
+    root.mkdir()
+
+    hidden = root / ".obsidian"
+    hidden.mkdir()
+    (hidden / "note.md").write_text("hidden")
+
+    visible = root / "Book"
+    visible.mkdir()
+    (visible / "chapter.md").write_text("# Book")
+
+    entries = scan_directory(root)
+
+    assert len(entries) == 1
+    assert isinstance(entries[0], Note)
+
+
+def test_scan_directory_navigates_into_folder(tmp_path):
+    """Test that scanning inside a Folder returns its nested Notes/Folders."""
+    root = tmp_path / "vault"
+    root.mkdir()
+
+    category = root / "Category"
+    category.mkdir()
+
+    course1 = category / "Course1"
+    course1.mkdir()
+    (course1 / "lesson.md").write_text("# Lesson")
+
+    course2 = category / "Course2"
+    course2.mkdir()
+    (course2 / "lesson.md").write_text("# Lesson")
+
+    # First level: Category is a Folder
+    entries = scan_directory(root)
+    assert len(entries) == 1
+    assert isinstance(entries[0], Folder)
+
+    # Drill into Category: Course1 and Course2 are Notes
+    sub_entries = scan_directory(entries[0].path)
+    assert len(sub_entries) == 2
+    assert all(isinstance(e, Note) for e in sub_entries)

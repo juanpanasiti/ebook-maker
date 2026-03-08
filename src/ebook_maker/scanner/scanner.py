@@ -4,7 +4,7 @@ from pathlib import Path
 from pydantic import ValidationError
 from pydantic_core import to_json
 
-from ebook_maker.core.models import Note, NoteMetadata
+from ebook_maker.core.models import Folder, Note, NoteMetadata, VaultEntry
 
 
 def scan_vault(obsidian_root: Path, default_author: str = "Unknown Author", default_publisher: str | None = None) -> list[Note]:
@@ -25,6 +25,38 @@ def scan_vault(obsidian_root: Path, default_author: str = "Unknown Author", defa
         notes.append(note)
         
     return notes
+
+
+def _has_notes_below(directory: Path) -> bool:
+    """Check if any descendant directory contains markdown files."""
+    for subdir in directory.rglob("*"):
+        if subdir.is_dir() and not subdir.name.startswith("."):
+            if any(f.is_file() and f.suffix == ".md" for f in subdir.iterdir()):
+                return True
+    return False
+
+
+def scan_directory(directory: Path, default_author: str = "Unknown Author", default_publisher: str | None = None) -> list[VaultEntry]:
+    """Scan a single directory level and return Notes and Folders.
+    
+    A direct child is a Note if it contains .md files.
+    A direct child is a Folder if it doesn't contain .md files but has notes deeper in its hierarchy.
+    """
+    entries: list[VaultEntry] = []
+
+    for child in sorted(directory.iterdir()):
+        if not child.is_dir() or child.name.startswith("."):
+            continue
+
+        has_md = any(f.is_file() and f.suffix == ".md" for f in child.iterdir())
+
+        if has_md:
+            note = process_note_directory(child, default_author, default_publisher)
+            entries.append(note)
+        elif _has_notes_below(child):
+            entries.append(Folder(path=child, name=child.name))
+
+    return entries
 
 
 def process_note_directory(directory: Path, default_author: str = "Unknown Author", default_publisher: str | None = None) -> Note:

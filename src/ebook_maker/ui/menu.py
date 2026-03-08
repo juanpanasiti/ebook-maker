@@ -3,7 +3,7 @@ from typing import Optional
 
 import questionary
 
-from ebook_maker.core.models import Note, NoteMetadata
+from ebook_maker.core.models import Folder, Note, NoteMetadata, VaultEntry
 from ebook_maker.core.settings import Settings
 from ebook_maker.scanner.scanner import write_metadata
 from ebook_maker.ui.console import console
@@ -27,24 +27,33 @@ def display_no_notes_found():
     sys.exit(0)
 
 
-def prompt_select_note(notes: list[Note]) -> Optional[Note]:
+def prompt_select_note(entries: list[VaultEntry], show_back: bool = False) -> Optional[Note | Folder | str]:
     """
-    Displays an interactive menu for the user to select which note to convert.
-    Returns the selected Note object, or None if the user cancels.
+    Displays an interactive menu for the user to select a note or navigate into a folder.
+    Returns the selected Note/Folder object, "back", "exit", or None if the user cancels.
     """
-    choices = [
-        questionary.Choice(
-            title=[
-                ("class:text", "📘 "),
-                ("class:title", f"{note.metadata.title} "),
-                ("class:dim", f"({len(note.markdown_files)} files)"),
-            ],
-            value=note,
-        )
-        for note in notes
-    ]
-    
-    # Add an exit option
+    choices = []
+    for entry in entries:
+        if isinstance(entry, Note):
+            choices.append(questionary.Choice(
+                title=[
+                    ("class:text", "📘 "),
+                    ("class:title", f"{entry.metadata.title} "),
+                    ("class:dim", f"({len(entry.markdown_files)} files)"),
+                ],
+                value=entry,
+            ))
+        else:
+            choices.append(questionary.Choice(
+                title=[
+                    ("class:text", "📁 "),
+                    ("class:folder", entry.name),
+                ],
+                value=entry,
+            ))
+
+    if show_back:
+        choices.append(questionary.Choice(title="🔙 Back", value="back"))
     choices.append(questionary.Choice(title="❌ Exit", value="exit"))
 
     # We use a custom style for questionary
@@ -60,6 +69,7 @@ def prompt_select_note(notes: list[Note]) -> Optional[Note]:
             ("instruction", "fg:#808080"),       # user instructions for select, rawselect, checkbox
             ("text", "fg:#ffffff"),              # plain text
             ("title", "fg:#00ff00 bold"),        # custom style we used in note title
+            ("folder", "fg:#f0c040 bold"),       # custom style for folder names
             ("dim", "fg:#808080"),               # custom style we used in note files count
         ]
     )
