@@ -43,7 +43,14 @@ def main():
     nav_stack: list = [settings.obsidian_root]
 
     while True:
+        console.clear()
+        display_welcome_banner()
+        console.print(f"✅ Found [bold green]{len(notes)}[/bold green] note(s).\n")
+
         current_dir = nav_stack[-1]
+        if current_dir != settings.obsidian_root:
+            console.print(f"[bold cyan]📂 {current_dir.name}[/bold cyan]\n")
+
         entries = scan_directory(
             current_dir,
             default_author=settings.default_author,
