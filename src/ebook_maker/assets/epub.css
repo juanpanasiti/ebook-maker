@@ -81,12 +81,46 @@ pre code span.line-number {
 }
 
 /* TABLE OF CONTENTS */
-nav#TOC ol, nav#TOC ul {
-  list-style-type: none;
+nav#TOC ol,
+nav#TOC ul,
+nav#toc ol,
+nav#toc ul,
+nav.toc ol,
+nav.toc ul,
+nav[role="doc-toc"] ol,
+nav[role="doc-toc"] ul,
+nav[epub\:type~="toc"] ol,
+nav[epub\:type~="toc"] ul {
+  list-style: none !important;
+  list-style-type: none !important;
   padding-left: 1em;
 }
-nav#TOC > ol, nav#TOC > ul {
+nav#TOC > ol,
+nav#TOC > ul,
+nav#toc > ol,
+nav#toc > ul,
+nav.toc > ol,
+nav.toc > ul,
+nav[role="doc-toc"] > ol,
+nav[role="doc-toc"] > ul,
+nav[epub\:type~="toc"] > ol,
+nav[epub\:type~="toc"] > ul {
   padding-left: 0;
+}
+nav#TOC li,
+nav#toc li,
+nav.toc li,
+nav[role="doc-toc"] li,
+nav[epub\:type~="toc"] li {
+  list-style: none !important;
+  list-style-type: none !important;
+}
+nav#TOC li::marker,
+nav#toc li::marker,
+nav.toc li::marker,
+nav[role="doc-toc"] li::marker,
+nav[epub\:type~="toc"] li::marker {
+  content: "";
 }
 
 /* TABLES */
