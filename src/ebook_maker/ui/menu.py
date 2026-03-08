@@ -92,7 +92,12 @@ def prompt_note_action(note: Note, settings: Settings) -> Optional[str]:
         questionary.Choice("✏️  Edit Metadata", "edit"),
         questionary.Choice("🚀 Generate EPUB", "generate"),
     ]
-    
+
+    # Only show 'Open location' if the EPUB file exists
+    epub_path = settings.epub_destination / f"{note.metadata.title}.epub"
+    if epub_path.exists():
+        choices.append(questionary.Choice("📂 Open EPUB Location", "open_location"))
+
     # Only show the option to send to Kindle if the configuration is active
     if settings.kindle_email and settings.smtp_user and settings.smtp_password:
         choices.append(questionary.Choice("📧 Send EPUB to Kindle", "send"))

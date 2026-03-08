@@ -93,6 +93,12 @@ def main():
             elif action == "edit":
                 prompt_edit_metadata(selected_note)
             
+            elif action == "open_location":
+                import subprocess
+                epub_path = settings.epub_destination / f"{selected_note.metadata.title}.epub"
+                subprocess.Popen(["xdg-open", str(epub_path.parent)])
+                console.print(f"📂 [bold green]Opened:[/bold green] {epub_path.parent}\n")
+
             elif action == "generate":
                 try:
                     console.print(f"\n[bold green]Generating EPUB for:[/bold green] {selected_note.metadata.title}")
