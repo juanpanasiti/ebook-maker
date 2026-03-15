@@ -123,6 +123,30 @@ nav[epub\:type~="toc"] li::marker {
   content: "";
 }
 
+/* TOC links without decoration */
+nav#TOC a,
+nav#toc a,
+nav.toc a,
+nav[role="doc-toc"] a,
+nav[epub\:type~="toc"] a {
+  text-decoration: none !important;
+}
+
+/* TOC first level: slightly larger and bold */
+nav#TOC > ol > li > a,
+nav#TOC > ul > li > a,
+nav#toc > ol > li > a,
+nav#toc > ul > li > a,
+nav.toc > ol > li > a,
+nav.toc > ul > li > a,
+nav[role="doc-toc"] > ol > li > a,
+nav[role="doc-toc"] > ul > li > a,
+nav[epub\:type~="toc"] > ol > li > a,
+nav[epub\:type~="toc"] > ul > li > a {
+  font-weight: bold;
+  font-size: 1.08em;
+}
+
 /* TABLES */
 table {
   width: 100%;
