@@ -5,6 +5,7 @@ import questionary
 
 from ebook_maker.core.models import Folder, Note, NoteMetadata, VaultEntry
 from ebook_maker.converter.converter import get_epub_output_filename
+from ebook_maker.converter.pdf_converter import get_pdf_output_filename
 from ebook_maker.core.settings import Settings
 from ebook_maker.scanner.scanner import write_metadata
 from ebook_maker.ui.console import console
@@ -16,7 +17,7 @@ def display_welcome_banner():
     """Shows the application welcome message and banner."""
     console.print()
     console.print("[bold cyan]╔════════════════════════════════════════════════════════════════╗[/bold cyan]")
-    console.print("[bold cyan]║[/bold cyan]                [bold yellow]📚 Obsidian to EPUB Maker[/bold yellow]                       [bold cyan]║[/bold cyan]")
+    console.print("[bold cyan]║[/bold cyan]             [bold yellow]📚 Obsidian to EPUB & PDF Maker[/bold yellow]                   [bold cyan]║[/bold cyan]")
     console.print("[bold cyan]╚════════════════════════════════════════════════════════════════╝[/bold cyan]")
     console.print()
 
@@ -92,17 +93,23 @@ def prompt_note_action(note: Note, settings: Settings) -> Optional[str]:
         questionary.Choice("🔍 View Metadata", "view"),
         questionary.Choice("✏️  Edit Metadata", "edit"),
         questionary.Choice("🚀 Generate EPUB", "generate"),
+        questionary.Choice("📄 Generate PDF (A4)", "generate_pdf"),
     ]
 
-    # Only show 'Open location' if the EPUB file exists
+    # Only show 'Open EPUB location' if the EPUB file exists
     epub_path = settings.epub_destination / get_epub_output_filename(note)
     if epub_path.exists():
         choices.append(questionary.Choice("📂 Open EPUB Location", "open_location"))
 
+    # Only show 'Open PDF location' if the PDF file exists
+    pdf_path = settings.epub_destination / get_pdf_output_filename(note)
+    if pdf_path.exists():
+        choices.append(questionary.Choice("📂 Open PDF Location", "open_pdf_location"))
+
     # Only show the option to send to Kindle if the configuration is active
     if settings.kindle_email and settings.smtp_user and settings.smtp_password:
         choices.append(questionary.Choice("📧 Send EPUB to Kindle", "send"))
-        
+
     choices.append(questionary.Choice("🔙 Back to Note Selection", "back"))
 
     console.print(f"\n[bold green]What would you like to do with:[/bold green] {note.metadata.title}?")

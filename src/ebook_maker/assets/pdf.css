@@ -1,0 +1,407 @@
+/* =========================================================
+   PDF STYLESHEET — A4 format
+   Used by WeasyPrint. Units in pt/cm/mm for print precision.
+   ========================================================= */
+
+/* ---- Google Fonts ---- */
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* =========================================================
+   PAGE SETUP
+   ========================================================= */
+@page {
+  size: A4;
+  margin: 2.8cm 2.5cm 2.8cm 2.8cm;
+
+  /* Page number — bottom center, only the number */
+  @bottom-center {
+    content: counter(page);
+    font-family: "Inter", sans-serif;
+    font-size: 9pt;
+    color: #999;
+  }
+
+  /* Thin decorative rule above footer */
+  @bottom-left {
+    content: "";
+    border-top: 0.5pt solid #e0e0e0;
+    width: 100%;
+    margin-top: 0.4cm;
+  }
+}
+
+/* Cover page: no header/footer, no margins */
+@page cover {
+  size: A4;
+  margin: 0;
+  @bottom-center { content: none; }
+  @bottom-left   { content: none; }
+  @top-center    { content: none; }
+}
+
+/* First content page (after cover): no page number on page 1 */
+@page :first {
+  @bottom-center { content: none; }
+  @bottom-left   { content: none; }
+}
+
+/* =========================================================
+   BASE TYPOGRAPHY
+   ========================================================= */
+body {
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-size: 11pt;
+  line-height: 1.7;
+  color: #1a1a1a;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================================
+   COVER PAGE
+   ========================================================= */
+.cover-page {
+  page: cover;
+  page-break-after: always;
+  width: 210mm;
+  height: 297mm;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  overflow: hidden;
+}
+
+.cover-page .cover-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  color: #111;
+  page-break-after: avoid;
+  orphans: 3;
+  widows: 3;
+}
+
+h1 {
+  font-size: 22pt;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5cm;
+  padding-bottom: 6pt;
+  border-bottom: 2pt solid #1a1a1a;
+  page-break-before: always;
+  line-height: 1.2;
+}
+
+/* First h1 doesn't force a page break */
+h1:first-of-type {
+  page-break-before: avoid;
+}
+
+h2 {
+  font-size: 16pt;
+  font-weight: 600;
+  margin-top: 1.2cm;
+  margin-bottom: 0.3cm;
+  color: #2c2c2c;
+}
+
+h3 {
+  font-size: 13pt;
+  font-weight: 600;
+  margin-top: 0.8cm;
+  margin-bottom: 0.2cm;
+  color: #3a3a3a;
+}
+
+h4 {
+  font-size: 11pt;
+  font-weight: 700;
+  margin-top: 0.6cm;
+  margin-bottom: 0.15cm;
+  font-style: italic;
+  color: #444;
+}
+
+/* =========================================================
+   PARAGRAPHS
+   ========================================================= */
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-indent: 1.4em;
+  orphans: 3;
+  widows: 3;
+}
+
+/* No indentation after headings, blockquotes, lists, or first para */
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p,
+h5 + p,
+h6 + p,
+blockquote + p,
+li > p,
+p:first-child {
+  text-indent: 0;
+}
+
+/* =========================================================
+   BLOCKQUOTES
+   ========================================================= */
+blockquote {
+  margin: 0.6cm 0 0.6cm 0.8cm;
+  padding: 0.3cm 0.5cm 0.3cm 0.8cm;
+  border-left: 3pt solid #bbb;
+  background-color: #fafafa;
+  font-style: italic;
+  font-size: 10.5pt;
+  color: #444;
+  page-break-inside: avoid;
+}
+
+blockquote p {
+  text-indent: 0;
+  margin: 0;
+}
+
+/* =========================================================
+   LISTS
+   ========================================================= */
+ul, ol {
+  margin-top: 0.2cm;
+  margin-bottom: 0.3cm;
+  padding-left: 1.4cm;
+}
+
+li {
+  margin-bottom: 0.1cm;
+  line-height: 1.6;
+}
+
+li > p {
+  text-indent: 0;
+  margin: 0;
+}
+
+/* =========================================================
+   CODE — INLINE
+   ========================================================= */
+code {
+  font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+  font-size: 9pt;
+  background-color: #f3f3f3;
+  border: 0.5pt solid #d8d8d8;
+  border-radius: 2pt;
+  padding: 1pt 4pt;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+/* =========================================================
+   CODE — BLOCKS
+   ========================================================= */
+pre {
+  font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+  font-size: 8.5pt;
+  line-height: 1.55;
+  background-color: #f7f7f7;
+  border: 0.5pt solid #d0d0d0;
+  border-left: 3pt solid #555;
+  border-radius: 3pt;
+  padding: 0.4cm 0.5cm;
+  margin: 0.5cm 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+  -webkit-hyphens: none;
+  page-break-inside: avoid;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Line numbers (Lua filter) */
+pre code span.line-number {
+  display: inline-block;
+  min-width: 2em;
+  padding-right: 0.8em;
+  text-align: right;
+  color: #aaa;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* =========================================================
+   TABLE OF CONTENTS
+   ========================================================= */
+nav#TOC,
+nav#toc {
+  page-break-after: always;
+  margin-top: 0.5cm;
+}
+
+nav#TOC h2,
+nav#toc h2 {
+  font-size: 18pt;
+  border-bottom: 1.5pt solid #1a1a1a;
+  padding-bottom: 4pt;
+  page-break-before: avoid;
+}
+
+nav#TOC ol,
+nav#TOC ul,
+nav#toc ol,
+nav#toc ul {
+  list-style: none;
+  padding-left: 0.5cm;
+}
+
+nav#TOC > ol,
+nav#TOC > ul,
+nav#toc > ol,
+nav#toc > ul {
+  padding-left: 0;
+}
+
+nav#TOC li,
+nav#toc li {
+  list-style: none;
+  padding: 2pt 0;
+  border-bottom: 0.3pt solid #eee;
+}
+
+nav#TOC li::marker,
+nav#toc li::marker {
+  content: "";
+}
+
+nav#TOC a,
+nav#toc a {
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+/* First-level TOC entries */
+nav#TOC > ol > li > a,
+nav#TOC > ul > li > a,
+nav#toc > ol > li > a,
+nav#toc > ul > li > a {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 11pt;
+}
+
+/* Second-level TOC entries */
+nav#TOC li li a,
+nav#toc li li a {
+  font-family: "Inter", sans-serif;
+  font-size: 10pt;
+  font-weight: 400;
+  color: #555;
+  padding-left: 0.5cm;
+}
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5cm 0;
+  font-size: 9.5pt;
+  font-family: "Inter", sans-serif;
+  page-break-inside: avoid;
+}
+
+th {
+  background-color: #2c2c2c;
+  color: #fff;
+  font-weight: 600;
+  padding: 5pt 8pt;
+  text-align: left;
+  font-size: 9pt;
+  letter-spacing: 0.02em;
+}
+
+td {
+  padding: 4pt 8pt;
+  border-bottom: 0.5pt solid #ddd;
+  vertical-align: top;
+}
+
+tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}
+
+/* =========================================================
+   IMAGES
+   ========================================================= */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.5cm auto;
+  page-break-inside: avoid;
+}
+
+figure {
+  margin: 0.5cm 0;
+  page-break-inside: avoid;
+  text-align: center;
+}
+
+figcaption {
+  font-family: "Inter", sans-serif;
+  font-size: 9pt;
+  color: #777;
+  font-style: italic;
+  margin-top: 4pt;
+  text-align: center;
+}
+
+/* =========================================================
+   HORIZONTAL RULE
+   ========================================================= */
+hr {
+  border: none;
+  border-top: 1pt solid #ccc;
+  margin: 0.8cm 0;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+a {
+  color: #2a6abb;
+  text-decoration: none;
+}
+
+/* Show URL after links in print */
+a[href]::after {
+  content: none; /* avoid cluttering text; can enable if desired */
+}
+
+/* =========================================================
+   UTILITY: AVOID BREAKS
+   ========================================================= */
+.no-break {
+  page-break-inside: avoid;
+}

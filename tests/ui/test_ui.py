@@ -12,7 +12,7 @@ def test_display_welcome_banner(capsys):
     """Test the welcome banner avoids errors."""
     display_welcome_banner()
     captured = capsys.readouterr()
-    assert "Obsidian to EPUB Maker" in captured.out
+    assert "Obsidian to EPUB & PDF Maker" in captured.out
 
 
 @patch("sys.exit")
