@@ -11,7 +11,7 @@
    ========================================================= */
 @page {
   size: A4;
-  margin: 2.8cm 2.5cm 2.8cm 2.8cm;
+  margin: 25mm 20mm;
 
   /* Page number — bottom center, only the number */
   @bottom-center {
@@ -34,20 +34,43 @@
 @page cover {
   size: A4;
   margin: 0;
-  @bottom-center { content: none; }
-  @bottom-left   { content: none; }
-  @top-center    { content: none; }
+
+
+  @bottom-center {
+    content: none;
+  }
+
+  @bottom-left {
+    content: none;
+  }
+
+  @top-center {
+    content: none;
+  }
 }
 
 /* First content page (after cover): no page number on page 1 */
 @page :first {
-  @bottom-center { content: none; }
-  @bottom-left   { content: none; }
+
+  @bottom-center {
+    content: none;
+  }
+
+  @bottom-left {
+    content: none;
+  }
 }
 
 /* =========================================================
    BASE TYPOGRAPHY
    ========================================================= */
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+}
+
 body {
   font-family: "Lora", Georgia, "Times New Roman", serif;
   font-size: 11pt;
@@ -56,8 +79,6 @@ body {
   text-align: justify;
   hyphens: auto;
   -webkit-hyphens: auto;
-  margin: 0;
-  padding: 0;
 }
 
 /* =========================================================
@@ -68,16 +89,16 @@ body {
   page-break-after: always;
   width: 210mm;
   height: 297mm;
-  margin: 0;
-  padding: 0;
-  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 
 .cover-page .cover-image {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   object-fit: cover;
   object-position: center center;
 }
@@ -85,7 +106,12 @@ body {
 /* =========================================================
    HEADINGS
    ========================================================= */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   color: #111;
   page-break-after: avoid;
@@ -146,14 +172,14 @@ p {
 }
 
 /* No indentation after headings, blockquotes, lists, or first para */
-h1 + p,
-h2 + p,
-h3 + p,
-h4 + p,
-h5 + p,
-h6 + p,
-blockquote + p,
-li > p,
+h1+p,
+h2+p,
+h3+p,
+h4+p,
+h5+p,
+h6+p,
+blockquote+p,
+li>p,
 p:first-child {
   text-indent: 0;
 }
@@ -180,7 +206,8 @@ blockquote p {
 /* =========================================================
    LISTS
    ========================================================= */
-ul, ol {
+ul,
+ol {
   margin-top: 0.2cm;
   margin-bottom: 0.3cm;
   padding-left: 1.4cm;
@@ -191,7 +218,7 @@ li {
   line-height: 1.6;
 }
 
-li > p {
+li>p {
   text-indent: 0;
   margin: 0;
 }
@@ -274,10 +301,10 @@ nav#toc ul {
   padding-left: 0.5cm;
 }
 
-nav#TOC > ol,
-nav#TOC > ul,
-nav#toc > ol,
-nav#toc > ul {
+nav#TOC>ol,
+nav#TOC>ul,
+nav#toc>ol,
+nav#toc>ul {
   padding-left: 0;
 }
 
@@ -300,10 +327,10 @@ nav#toc a {
 }
 
 /* First-level TOC entries */
-nav#TOC > ol > li > a,
-nav#TOC > ul > li > a,
-nav#toc > ol > li > a,
-nav#toc > ul > li > a {
+nav#TOC>ol>li>a,
+nav#TOC>ul>li>a,
+nav#toc>ol>li>a,
+nav#toc>ul>li>a {
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 11pt;
@@ -396,7 +423,8 @@ a {
 
 /* Show URL after links in print */
 a[href]::after {
-  content: none; /* avoid cluttering text; can enable if desired */
+  content: none;
+  /* avoid cluttering text; can enable if desired */
 }
 
 /* =========================================================
