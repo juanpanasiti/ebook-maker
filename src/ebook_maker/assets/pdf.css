@@ -4,7 +4,7 @@
    ========================================================= */
 
 /* ---- Google Fonts ---- */
-@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 /* =========================================================
    PAGE SETUP
@@ -70,13 +70,33 @@ body {
 }
 
 body {
-  font-family: "Lora", Georgia, "Times New Roman", serif;
-  font-size: 11pt;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-size: 12pt;
   line-height: 1.7;
-  color: #1a1a1a;
+  color: var(--text-main);
   text-align: justify;
   hyphens: auto;
   -webkit-hyphens: auto;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+:root {
+  /* Neutral palette tuned for color, grayscale print, and screen */
+  --text-main: #1f2328;
+  --text-muted: #4b5563;
+  --text-subtle: #6b7280;
+  --rule-soft: #e5e7eb;
+  --rule-main: #d1d5db;
+  --surface-soft: #f8fafc;
+  --surface-code: #f3f4f6;
+  --accent-link: #1d4ed8;
+
+  /* Heading palette: distinct in color and readable in grayscale */
+  --heading-1: #111827;
+  --heading-2: #1f3b57;
+  --heading-3: #35546e;
+  --heading-4: #4b5563;
 }
 
 /* =========================================================
@@ -113,6 +133,7 @@ h5,
 h6 {
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   color: #111;
+  text-align: left;
   page-break-after: avoid;
   orphans: 3;
   widows: 3;
@@ -124,7 +145,8 @@ h1 {
   margin-top: 0;
   margin-bottom: 0.5cm;
   padding-bottom: 6pt;
-  border-bottom: 2pt solid #1a1a1a;
+  color: var(--heading-1);
+  border-bottom: 2pt solid var(--heading-1);
   page-break-before: always;
   line-height: 1.2;
 }
@@ -139,7 +161,7 @@ h2 {
   font-weight: 600;
   margin-top: 1.2cm;
   margin-bottom: 0.3cm;
-  color: #2c2c2c;
+  color: var(--heading-2);
 }
 
 h3 {
@@ -147,7 +169,7 @@ h3 {
   font-weight: 600;
   margin-top: 0.8cm;
   margin-bottom: 0.2cm;
-  color: #3a3a3a;
+  color: var(--heading-3);
 }
 
 h4 {
@@ -156,7 +178,23 @@ h4 {
   margin-top: 0.6cm;
   margin-bottom: 0.15cm;
   font-style: italic;
-  color: #444;
+  color: var(--heading-4);
+}
+
+h5 {
+  font-size: 10.5pt;
+  font-weight: 700;
+  margin-top: 0.45cm;
+  margin-bottom: 0.1cm;
+  color: var(--text-muted);
+}
+
+h6 {
+  font-size: 10pt;
+  font-weight: 600;
+  margin-top: 0.35cm;
+  margin-bottom: 0.1cm;
+  color: var(--text-subtle);
 }
 
 /* =========================================================
@@ -164,7 +202,7 @@ h4 {
    ========================================================= */
 p {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 0.35em;
   text-indent: 1.4em;
   orphans: 3;
   widows: 3;
@@ -189,11 +227,11 @@ p:first-child {
 blockquote {
   margin: 0.6cm 0 0.6cm 0.8cm;
   padding: 0.3cm 0.5cm 0.3cm 0.8cm;
-  border-left: 3pt solid #bbb;
-  background-color: #fafafa;
+  border-left: 3pt solid var(--rule-main);
+  background-color: var(--surface-soft);
   font-style: italic;
   font-size: 10.5pt;
-  color: #444;
+  color: var(--text-muted);
   page-break-inside: avoid;
 }
 
@@ -227,11 +265,13 @@ li>p {
    ========================================================= */
 code {
   font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
-  font-size: 9pt;
-  background-color: #f3f3f3;
-  border: 0.5pt solid #d8d8d8;
+  font-size: 10pt;
+  background-color: var(--surface-code);
+  border: 0.5pt solid var(--rule-main);
   border-radius: 2pt;
   padding: 1pt 4pt;
+  color: #0f172a;
+  font-variant-ligatures: none;
   hyphens: none;
   -webkit-hyphens: none;
 }
@@ -241,17 +281,20 @@ code {
    ========================================================= */
 pre {
   font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
-  font-size: 8.5pt;
+  font-size: 9.5pt;
   line-height: 1.55;
-  background-color: #f7f7f7;
-  border: 0.5pt solid #d0d0d0;
-  border-left: 3pt solid #555;
+  background-color: var(--surface-code);
+  border: 0.5pt solid var(--rule-main);
+  border-left: 3pt solid var(--heading-3);
   border-radius: 3pt;
   padding: 0.4cm 0.5cm;
   margin: 0.5cm 0;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
   word-wrap: break-word;
   word-break: normal;
+  font-variant-ligatures: none;
+  tab-size: 4;
   hyphens: none;
   -webkit-hyphens: none;
   page-break-inside: avoid;
@@ -270,7 +313,7 @@ pre code span.line-number {
   min-width: 2em;
   padding-right: 0.8em;
   text-align: right;
-  color: #aaa;
+  color: var(--text-subtle);
   user-select: none;
   -webkit-user-select: none;
 }
@@ -287,7 +330,7 @@ nav#toc {
 nav#TOC h2,
 nav#toc h2 {
   font-size: 18pt;
-  border-bottom: 1.5pt solid #1a1a1a;
+  border-bottom: 1.5pt solid var(--heading-1);
   padding-bottom: 4pt;
   page-break-before: avoid;
 }
@@ -310,8 +353,8 @@ nav#toc>ul {
 nav#TOC li,
 nav#toc li {
   list-style: none;
-  padding: 2pt 0;
-  border-bottom: 0.3pt solid #eee;
+  padding: 3pt 0;
+  border-bottom: 0.3pt solid var(--rule-soft);
 }
 
 nav#TOC li::marker,
@@ -322,7 +365,13 @@ nav#toc li::marker {
 nav#TOC a,
 nav#toc a {
   text-decoration: none;
-  color: #1a1a1a;
+  color: var(--text-main);
+}
+
+nav#TOC a::after,
+nav#toc a::after {
+  content: leader('.') target-counter(attr(href), page);
+  color: var(--text-subtle);
 }
 
 /* First-level TOC entries */
@@ -341,7 +390,7 @@ nav#toc li li a {
   font-family: "Inter", sans-serif;
   font-size: 10pt;
   font-weight: 400;
-  color: #555;
+  color: var(--text-muted);
   padding-left: 0.5cm;
 }
 
@@ -352,29 +401,29 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin: 0.5cm 0;
-  font-size: 9.5pt;
+  font-size: 10pt;
   font-family: "Inter", sans-serif;
   page-break-inside: avoid;
 }
 
 th {
-  background-color: #2c2c2c;
+  background-color: var(--heading-1);
   color: #fff;
   font-weight: 600;
   padding: 5pt 8pt;
   text-align: left;
-  font-size: 9pt;
+  font-size: 9.5pt;
   letter-spacing: 0.02em;
 }
 
 td {
   padding: 4pt 8pt;
-  border-bottom: 0.5pt solid #ddd;
+  border-bottom: 0.5pt solid var(--rule-main);
   vertical-align: top;
 }
 
 tr:nth-child(even) td {
-  background-color: #f9f9f9;
+  background-color: var(--surface-soft);
 }
 
 /* =========================================================
@@ -399,7 +448,7 @@ figure {
 figcaption {
   font-family: "Inter", sans-serif;
   font-size: 9pt;
-  color: #777;
+  color: var(--text-subtle);
   font-style: italic;
   margin-top: 4pt;
   text-align: center;
@@ -410,7 +459,7 @@ figcaption {
    ========================================================= */
 hr {
   border: none;
-  border-top: 1pt solid #ccc;
+  border-top: 1pt solid var(--rule-main);
   margin: 0.8cm 0;
 }
 
@@ -418,8 +467,9 @@ hr {
    LINKS
    ========================================================= */
 a {
-  color: #2a6abb;
-  text-decoration: none;
+  color: var(--accent-link);
+  text-decoration: underline;
+  text-underline-offset: 1.5pt;
 }
 
 /* Show URL after links in print */
