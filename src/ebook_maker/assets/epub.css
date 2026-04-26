@@ -484,3 +484,47 @@ div[align='left'] {
 .admonition-cite .admonition-title::before {
     content: '❞';
 }
+
+/* =========================================================
+   TASK LISTS
+   ========================================================= */
+ul.task-list {
+    list-style: none;
+    padding-left: 2em;
+}
+
+ul.task-list li {
+    position: relative;
+    padding-left: 0;
+    margin-bottom: 0.1em;
+    list-style: none;
+}
+
+ul.task-list input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0.85em;
+    height: 0.85em;
+    margin: 0 0.5em 0 -1.5em;
+    border: 1px solid #555;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -0.1em;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+ul.task-list input[type="checkbox"]:checked {
+    background-color: var(--accent-main, #6366f1);
+    border-color: var(--accent-main, #6366f1);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>');
+    background-size: 75%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+ul.task-list input[type="checkbox"]:checked + del {
+    color: #555;
+}

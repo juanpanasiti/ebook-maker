@@ -760,3 +760,46 @@ div[align='left'] {
 .admonition-cite .admonition-title::before {
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>');
 }
+
+/* =========================================================
+   TASK LISTS
+   ========================================================= */
+ul.task-list {
+    list-style: none;
+    padding-left: 1.4cm;
+}
+
+ul.task-list li {
+    position: relative;
+    padding-left: 0;
+    margin-bottom: 0.1cm;
+}
+
+ul.task-list input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0.85em;
+    height: 0.85em;
+    margin: 0 0.5em 0 -1.4em;
+    border: 1pt solid var(--text-subtle);
+    border-radius: 2.5pt;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -0.1em;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+ul.task-list input[type="checkbox"]:checked {
+    background-color: var(--accent-main);
+    border-color: var(--accent-main);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>');
+    background-size: 75%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+ul.task-list input[type="checkbox"]:checked + del {
+    color: var(--text-subtle);
+}
