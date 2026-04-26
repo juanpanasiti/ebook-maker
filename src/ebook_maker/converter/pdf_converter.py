@@ -99,7 +99,9 @@ def generate_pdf(note: Note, output_dir: Path) -> Path:
 
     # 3. Build extra args for pandoc (HTML output)
     extra_args = [
+        "--from=markdown+markdown_in_html_blocks",  # Ensure markdown translates inside <div align="right">
         "--standalone",
+        "--highlight-style=tango", # Inyecta CSS del tema Tango nativo de Pandoc (mejores colores)
         "--toc",
         "--toc-depth=2",
         f"--resource-path={str(note.path)}",
@@ -126,6 +128,16 @@ def generate_pdf(note: Note, output_dir: Path) -> Path:
     lua_filter_path = Path(ebook_maker.__file__).parent / "assets" / "line-numbers.lua"
     if lua_filter_path.exists():
         extra_args.append(f"--lua-filter={str(lua_filter_path)}")
+
+    # Add Lua filter for Obsidian Callouts
+    callout_lua = Path(ebook_maker.__file__).parent / "assets" / "obsidian-callouts.lua"
+    if callout_lua.exists():
+        extra_args.append(f"--lua-filter={str(callout_lua)}")
+
+    # Add Lua filter for unsupported syntax aliases (e.g. rego -> go)
+    syntax_alias_lua = Path(ebook_maker.__file__).parent / "assets" / "syntax-alias.lua"
+    if syntax_alias_lua.exists():
+        extra_args.append(f"--lua-filter={str(syntax_alias_lua)}")
 
     # 4. Convert Markdown → HTML via pandoc
     try:

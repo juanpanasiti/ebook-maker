@@ -34,7 +34,10 @@ def generate_epub(note: Note, output_dir: Path) -> Path:
     output_path = output_dir / output_filename
 
     # 3. Construct extra arguments for pandoc from metadata
-    extra_args = []
+    extra_args = [
+        "--from=markdown+markdown_in_html_blocks",  # Enable parsing markdown inside HTML like <div align="right">
+        "--highlight-style=tango",  # Tema más vibrante y compatible que pygments
+    ]
     
     # Title
     extra_args.append(f"--metadata=title:{note.metadata.title}")
@@ -80,6 +83,16 @@ def generate_epub(note: Note, output_dir: Path) -> Path:
     lua_filter_path = Path(ebook_maker.__file__).parent / "assets" / "line-numbers.lua"
     if lua_filter_path.exists():
         extra_args.append(f"--lua-filter={str(lua_filter_path)}")
+
+    # Add Lua filter for Obsidian Callouts
+    callout_lua = Path(ebook_maker.__file__).parent / "assets" / "obsidian-callouts.lua"
+    if callout_lua.exists():
+        extra_args.append(f"--lua-filter={str(callout_lua)}")
+
+    # Add Lua filter for unsupported syntax aliases (e.g. rego -> go)
+    syntax_alias_lua = Path(ebook_maker.__file__).parent / "assets" / "syntax-alias.lua"
+    if syntax_alias_lua.exists():
+        extra_args.append(f"--lua-filter={str(syntax_alias_lua)}")
 
     # 4. Generate the actual EPUB using pypandoc
     # We use format 'markdown' explicitly and target 'epub'
