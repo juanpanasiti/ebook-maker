@@ -4,59 +4,57 @@
    ========================================================= */
 
 /* ---- Google Fonts ---- */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* =========================================================
    PAGE SETUP
    ========================================================= */
 @page {
-  size: A4;
+    size: A4;
 
-  /* Page number — bottom center, only the number */
-  @bottom-center {
-    content: counter(page);
-    font-family: "Inter", sans-serif;
-    font-size: 9pt;
-    color: #999;
-  }
+    /* Page number — bottom center, only the number */
+    @bottom-center {
+        content: counter(page);
+        font-family: 'Inter', sans-serif;
+        font-size: 9pt;
+        color: #999;
+    }
 
-  /* Thin decorative rule above footer */
-  @bottom-left {
-    content: "";
-    border-top: 0.5pt solid #e0e0e0;
-    width: 100%;
-  }
+    /* Thin decorative rule above footer */
+    @bottom-left {
+        content: '';
+        border-top: 0.5pt solid #e0e0e0;
+        width: 100%;
+    }
 }
 
 /* Cover page: no header/footer, no margins */
 @page cover {
-  size: A4;
-  margin: 0;
+    size: A4;
+    margin: 0;
 
+    @bottom-center {
+        content: none;
+    }
 
-  @bottom-center {
-    content: none;
-  }
+    @bottom-left {
+        content: none;
+    }
 
-  @bottom-left {
-    content: none;
-  }
-
-  @top-center {
-    content: none;
-  }
+    @top-center {
+        content: none;
+    }
 }
 
 /* First content page (after cover): no page number on page 1 */
 @page :first {
+    @bottom-center {
+        content: none;
+    }
 
-  @bottom-center {
-    content: none;
-  }
-
-  @bottom-left {
-    content: none;
-  }
+    @bottom-left {
+        content: none;
+    }
 }
 
 /* =========================================================
@@ -64,62 +62,62 @@
    ========================================================= */
 html,
 body {
-  margin: 0 !important;
-  padding: 0 !important;
-  max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
 }
 
 body {
-  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
-  font-size: 12pt;
-  line-height: 1.7;
-  color: var(--text-main);
-  text-align: justify;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  font-kerning: normal;
-  text-rendering: optimizeLegibility;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 12pt;
+    line-height: 1.7;
+    color: var(--text-main);
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
 }
 
 :root {
-  /* Neutral palette tuned for color, grayscale print, and screen */
-  --text-main: #1f2328;
-  --text-muted: #4b5563;
-  --text-subtle: #6b7280;
-  --rule-soft: #e5e7eb;
-  --rule-main: #d1d5db;
-  --surface-soft: #f8fafc;
-  --surface-code: #f3f4f6;
-  --accent-link: #1d4ed8;
+    /* Neutral palette tuned for color, grayscale print, and screen */
+    --text-main: #1f2328;
+    --text-muted: #4b5563;
+    --text-subtle: #6b7280;
+    --rule-soft: #e5e7eb;
+    --rule-main: #d1d5db;
+    --surface-soft: #f8fafc;
+    --surface-code: #f3f4f6;
+    --accent-link: #1d4ed8;
 
-  /* Heading palette: distinct in color and readable in grayscale */
-  --heading-1: #111827;
-  --heading-2: #1f3b57;
-  --heading-3: #35546e;
-  --heading-4: #4b5563;
+    /* Heading palette: distinct in color and readable in grayscale */
+    --heading-1: #111827;
+    --heading-2: #1f3b57;
+    --heading-3: #35546e;
+    --heading-4: #4b5563;
 }
 
 /* =========================================================
    COVER PAGE
    ========================================================= */
 .cover-page {
-  page: cover;
-  page-break-after: always;
-  width: 210mm;
-  height: 297mm;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+    page: cover;
+    page-break-after: always;
+    width: 210mm;
+    height: 297mm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .cover-page .cover-image {
-  display: block;
-  width: auto;
-  height: auto;
-  max-height: none;
-  object-fit: cover;
-  object-position: center center;
+    display: block;
+    width: auto;
+    height: auto;
+    max-height: none;
+    object-fit: cover;
+    object-position: center center;
 }
 
 /* =========================================================
@@ -131,113 +129,113 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
-  color: #111;
-  text-align: left;
-  page-break-after: avoid;
-  orphans: 3;
-  widows: 3;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: #111;
+    text-align: left;
+    page-break-after: avoid;
+    orphans: 3;
+    widows: 3;
 }
 
 h1 {
-  font-size: 22pt;
-  font-weight: 700;
-  margin-top: 0;
-  margin-bottom: 0.5cm;
-  padding-bottom: 6pt;
-  color: var(--heading-1);
-  border-bottom: 2pt solid var(--heading-1);
-  page-break-before: always;
-  line-height: 1.2;
+    font-size: 22pt;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.5cm;
+    padding-bottom: 6pt;
+    color: var(--heading-1);
+    border-bottom: 2pt solid var(--heading-1);
+    page-break-before: always;
+    line-height: 1.2;
 }
 
 /* First h1 doesn't force a page break */
 h1:first-of-type {
-  page-break-before: avoid;
+    page-break-before: avoid;
 }
 
 h2 {
-  font-size: 16pt;
-  font-weight: 600;
-  margin-top: 1.2cm;
-  margin-bottom: 0.3cm;
-  color: var(--heading-2);
+    font-size: 16pt;
+    font-weight: 600;
+    margin-top: 1.2cm;
+    margin-bottom: 0.3cm;
+    color: var(--heading-2);
 }
 
 h3 {
-  font-size: 13pt;
-  font-weight: 600;
-  margin-top: 0.8cm;
-  margin-bottom: 0.2cm;
-  color: var(--heading-3);
+    font-size: 13pt;
+    font-weight: 600;
+    margin-top: 0.8cm;
+    margin-bottom: 0.2cm;
+    color: var(--heading-3);
 }
 
 h4 {
-  font-size: 11pt;
-  font-weight: 700;
-  margin-top: 0.6cm;
-  margin-bottom: 0.15cm;
-  font-style: italic;
-  color: var(--heading-4);
+    font-size: 11pt;
+    font-weight: 700;
+    margin-top: 0.6cm;
+    margin-bottom: 0.15cm;
+    font-style: italic;
+    color: var(--heading-4);
 }
 
 h5 {
-  font-size: 10.5pt;
-  font-weight: 700;
-  margin-top: 0.45cm;
-  margin-bottom: 0.1cm;
-  color: var(--text-muted);
+    font-size: 10.5pt;
+    font-weight: 700;
+    margin-top: 0.45cm;
+    margin-bottom: 0.1cm;
+    color: var(--text-muted);
 }
 
 h6 {
-  font-size: 10pt;
-  font-weight: 600;
-  margin-top: 0.35cm;
-  margin-bottom: 0.1cm;
-  color: var(--text-subtle);
+    font-size: 10pt;
+    font-weight: 600;
+    margin-top: 0.35cm;
+    margin-bottom: 0.1cm;
+    color: var(--text-subtle);
 }
 
 /* =========================================================
    PARAGRAPHS
    ========================================================= */
 p {
-  margin-top: 0;
-  margin-bottom: 0.35em;
-  text-indent: 1.4em;
-  orphans: 3;
-  widows: 3;
+    margin-top: 0;
+    margin-bottom: 0.35em;
+    text-indent: 1.4em;
+    orphans: 3;
+    widows: 3;
 }
 
 /* No indentation after headings, blockquotes, lists, or first para */
-h1+p,
-h2+p,
-h3+p,
-h4+p,
-h5+p,
-h6+p,
-blockquote+p,
-li>p,
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p,
+h5 + p,
+h6 + p,
+blockquote + p,
+li > p,
 p:first-child {
-  text-indent: 0;
+    text-indent: 0;
 }
 
 /* =========================================================
    BLOCKQUOTES
    ========================================================= */
 blockquote {
-  margin: 0.6cm 0 0.6cm 0.8cm;
-  padding: 0.3cm 0.5cm 0.3cm 0.8cm;
-  border-left: 3pt solid var(--rule-main);
-  background-color: var(--surface-soft);
-  font-style: italic;
-  font-size: 10.5pt;
-  color: var(--text-muted);
-  page-break-inside: avoid;
+    margin: 0.6cm 0 0.6cm 0.8cm;
+    padding: 0.3cm 0.5cm 0.3cm 0.8cm;
+    border-left: 3pt solid var(--rule-main);
+    background-color: var(--surface-soft);
+    font-style: italic;
+    font-size: 10.5pt;
+    color: var(--text-muted);
+    page-break-inside: avoid;
 }
 
 blockquote p {
-  text-indent: 0;
-  margin: 0;
+    text-indent: 0;
+    margin: 0;
 }
 
 /* =========================================================
@@ -245,77 +243,116 @@ blockquote p {
    ========================================================= */
 ul,
 ol {
-  margin-top: 0.2cm;
-  margin-bottom: 0.3cm;
-  padding-left: 1.4cm;
+    margin-top: 0.2cm;
+    margin-bottom: 0.3cm;
+    padding-left: 1.4cm;
 }
 
 li {
-  margin-bottom: 0.1cm;
-  line-height: 1.6;
+    margin-bottom: 0.1cm;
+    line-height: 1.6;
 }
 
-li>p {
-  text-indent: 0;
-  margin: 0;
+li > p {
+    text-indent: 0;
+    margin: 0;
 }
 
 /* =========================================================
    CODE — INLINE
    ========================================================= */
 code {
-  font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
-  font-size: 10pt;
-  background-color: var(--surface-code);
-  border: 0.5pt solid var(--rule-main);
-  border-radius: 2pt;
-  padding: 1pt 4pt;
-  color: #0f172a;
-  font-variant-ligatures: none;
-  hyphens: none;
-  -webkit-hyphens: none;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 10pt;
+    background-color: var(--surface-code);
+    border: 0.5pt solid var(--rule-main);
+    border-radius: 2pt;
+    padding: 1pt 4pt;
+    color: #0f172a;
+    font-variant-ligatures: none;
+    hyphens: none;
+    -webkit-hyphens: none;
 }
 
 /* =========================================================
    CODE — BLOCKS
    ========================================================= */
 pre {
-  font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
-  font-size: 9.5pt;
-  line-height: 1.55;
-  background-color: var(--surface-code);
-  border: 0.5pt solid var(--rule-main);
-  border-left: 3pt solid var(--heading-3);
-  border-radius: 3pt;
-  padding: 0.4cm 0.5cm;
-  margin: 0.5cm 0;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  word-wrap: break-word;
-  word-break: normal;
-  font-variant-ligatures: none;
-  tab-size: 4;
-  hyphens: none;
-  -webkit-hyphens: none;
-  page-break-inside: avoid;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.55;
+    background-color: var(--surface-code);
+    border: 0.5pt solid var(--rule-main);
+    border-left: 3pt solid var(--heading-3);
+    border-radius: 3pt;
+    padding: 0.4cm 0.5cm;
+    margin: 0.5cm 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
+    word-break: normal;
+    font-variant-ligatures: none;
+    tab-size: 4;
+    hyphens: none;
+    -webkit-hyphens: none;
+    page-break-inside: avoid;
 }
 
 pre code {
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    white-space: pre-wrap !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
 }
 
-/* Line numbers (Lua filter) */
-pre code span.line-number {
-  display: inline-block;
-  min-width: 2em;
-  padding-right: 0.8em;
-  text-align: right;
-  color: var(--text-subtle);
-  user-select: none;
-  -webkit-user-select: none;
+/* NATIVE PANDOC HIGHLIGHTING & LINE NUMBERS FIXES */
+code.sourceCode,
+pre.sourceCode {
+    white-space: normal !important; /* Colapsa los saltos de linea /n físicos de pandoc */
+}
+code.sourceCode {
+    display: block !important;
+}
+
+/* Transform each line into a block to allow hanging indent for long wraps */
+code.sourceCode > span {
+    display: block !important;
+    white-space: pre-wrap !important;
+    overflow-wrap: anywhere !important;
+    word-wrap: break-word !important;
+    word-break: normal !important;
+    text-indent: -5.5em !important;
+    padding-left: 5.5em !important;
+    padding-right: 1em !important;
+    position: static !important;
+    left: 0 !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+}
+
+/* Fix for line numbers generated by Pandoc (prevents underlines & fixes alignment) */
+pre.numberSource code > span > a:first-child::before {
+    display: inline-block !important;
+    position: static !important;
+    text-decoration: none !important;
+    color: #999 !important;
+    border-right: 1px solid #c0c0c0 !important;
+    text-indent: 0 !important;
+    width: 2.5em !important;
+    margin-right: 1em !important;
+    padding-right: 0.5em !important;
+    left: 0 !important;
+}
+pre.numberSource a.sourceLine,
+code.sourceCode a {
+    text-decoration: none !important;
+    border: none !important;
+}
+pre a {
+    text-decoration: none !important;
 }
 
 /* =========================================================
@@ -323,164 +360,403 @@ pre code span.line-number {
    ========================================================= */
 nav#TOC,
 nav#toc {
-  page-break-after: always;
-  margin-top: 0.5cm;
+    page-break-after: always;
+    margin-top: 0.5cm;
 }
 
 nav#TOC h2,
 nav#toc h2 {
-  font-size: 18pt;
-  border-bottom: 1.5pt solid var(--heading-1);
-  padding-bottom: 4pt;
-  page-break-before: avoid;
+    font-size: 18pt;
+    border-bottom: 1.5pt solid var(--heading-1);
+    padding-bottom: 4pt;
+    page-break-before: avoid;
 }
 
 nav#TOC ol,
 nav#TOC ul,
 nav#toc ol,
 nav#toc ul {
-  list-style: none;
-  padding-left: 0.5cm;
+    list-style: none;
+    padding-left: 0.5cm;
 }
 
-nav#TOC>ol,
-nav#TOC>ul,
-nav#toc>ol,
-nav#toc>ul {
-  padding-left: 0;
+nav#TOC > ol,
+nav#TOC > ul,
+nav#toc > ol,
+nav#toc > ul {
+    padding-left: 0;
 }
 
 nav#TOC li,
 nav#toc li {
-  list-style: none;
-  padding: 3pt 0;
-  border-bottom: 0.3pt solid var(--rule-soft);
+    list-style: none;
+    padding: 3pt 0;
+    border-bottom: 0.3pt solid var(--rule-soft);
 }
 
 nav#TOC li::marker,
 nav#toc li::marker {
-  content: "";
+    content: '';
 }
 
 nav#TOC a,
 nav#toc a {
-  text-decoration: none;
-  color: var(--text-main);
+    text-decoration: none;
+    color: var(--text-main);
 }
 
 nav#TOC a::after,
 nav#toc a::after {
-  content: leader('.') target-counter(attr(href), page);
-  color: var(--text-subtle);
+    content: leader('.') target-counter(attr(href), page);
+    color: var(--text-subtle);
 }
 
 /* First-level TOC entries */
-nav#TOC>ol>li>a,
-nav#TOC>ul>li>a,
-nav#toc>ol>li>a,
-nav#toc>ul>li>a {
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  font-size: 11pt;
+nav#TOC > ol > li > a,
+nav#TOC > ul > li > a,
+nav#toc > ol > li > a,
+nav#toc > ul > li > a {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 11pt;
 }
 
 /* Second-level TOC entries */
 nav#TOC li li a,
 nav#toc li li a {
-  font-family: "Inter", sans-serif;
-  font-size: 10pt;
-  font-weight: 400;
-  color: var(--text-muted);
-  padding-left: 0.5cm;
+    font-family: 'Inter', sans-serif;
+    font-size: 10pt;
+    font-weight: 400;
+    color: var(--text-muted);
+    padding-left: 0.5cm;
 }
 
 /* =========================================================
    TABLES
    ========================================================= */
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0.5cm 0;
-  font-size: 10pt;
-  font-family: "Inter", sans-serif;
-  page-break-inside: avoid;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.5cm 0;
+    font-size: 10pt;
+    font-family: 'Inter', sans-serif;
+    page-break-inside: avoid;
 }
 
 th {
-  background-color: var(--heading-1);
-  color: #fff;
-  font-weight: 600;
-  padding: 5pt 8pt;
-  text-align: left;
-  font-size: 9.5pt;
-  letter-spacing: 0.02em;
+    background-color: var(--heading-1);
+    color: #fff;
+    font-weight: 600;
+    padding: 5pt 8pt;
+    text-align: left;
+    font-size: 9.5pt;
+    letter-spacing: 0.02em;
 }
 
 td {
-  padding: 4pt 8pt;
-  border-bottom: 0.5pt solid var(--rule-main);
-  vertical-align: top;
+    padding: 4pt 8pt;
+    border-bottom: 0.5pt solid var(--rule-main);
+    vertical-align: top;
 }
 
 tr:nth-child(even) td {
-  background-color: var(--surface-soft);
+    background-color: var(--surface-soft);
 }
 
 /* =========================================================
    IMAGES
    ========================================================= */
 img {
-  max-width: 100%;
-  max-height: 85vh;
-  object-fit: contain;
-  height: auto;
-  display: block;
-  margin: 0.5cm auto;
-  page-break-inside: avoid;
+    max-width: 100% !important;
+    max-height: 25cm !important;
+    object-fit: contain;
+    height: auto !important;
+    display: block;
+    margin: 0.5cm auto;
+    page-break-inside: avoid;
 }
 
 figure {
-  margin: 0.5cm 0;
-  page-break-inside: avoid;
-  text-align: center;
+    margin: 0.5cm 0;
+    page-break-inside: avoid;
+    text-align: center;
 }
 
 figcaption {
-  font-family: "Inter", sans-serif;
-  font-size: 9pt;
-  color: var(--text-subtle);
-  font-style: italic;
-  margin-top: 4pt;
-  text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 9pt;
+    color: var(--text-subtle);
+    font-style: italic;
+    margin-top: 4pt;
+    text-align: center;
 }
 
 /* =========================================================
    HORIZONTAL RULE
    ========================================================= */
 hr {
-  border: none;
-  border-top: 1pt solid var(--rule-main);
-  margin: 0.8cm 0;
+    border: none;
+    border-top: 1pt solid var(--rule-main);
+    margin: 0.8cm 0;
 }
 
 /* =========================================================
    LINKS
    ========================================================= */
 a {
-  color: var(--accent-link);
-  text-decoration: underline;
-  text-underline-offset: 1.5pt;
+    color: var(--accent-link);
+    text-decoration: underline;
+    text-underline-offset: 1.5pt;
 }
 
 /* Show URL after links in print */
 a[href]::after {
-  content: none;
-  /* avoid cluttering text; can enable if desired */
+    content: none;
+    /* avoid cluttering text; can enable if desired */
 }
 
 /* =========================================================
    UTILITY: AVOID BREAKS
    ========================================================= */
 .no-break {
-  page-break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+/* =========================================================
+   OBSIDIAN CALLOUTS & RAW HTML FIXES
+   ========================================================= */
+div[align='right'] {
+    text-align: right;
+}
+div[align='center'] {
+    text-align: center;
+}
+div[align='left'] {
+    text-align: left;
+}
+
+/* Base Admonition Setup */
+.admonition {
+    margin: 1.5em 0;
+    padding: 1em 1.2em;
+    border-left: 4px solid var(--rule-main);
+    background-color: var(--surface-soft);
+    border-radius: 4px;
+    page-break-inside: avoid;
+    font-size: 10.5pt;
+    color: var(--text-main);
+}
+
+.admonition-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 11pt;
+    margin-bottom: 0.4em;
+    color: var(--heading-3);
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admonition-title::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.admonition-content p {
+    margin-bottom: 0.5em;
+    text-indent: 0;
+}
+.admonition-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================================================
+   CALLOUT TYPES (COLORS & ICONS)
+   ========================================================= */
+
+/* 1. Note (Blue) */
+.admonition-note {
+    border-left-color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.05);
+}
+.admonition-note .admonition-title {
+    color: #2563eb;
+}
+.admonition-note .admonition-title::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%232563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>');
+}
+
+/* 2. Abstract, Summary, Tldr (Teal) */
+.admonition-abstract,
+.admonition-summary,
+.admonition-tldr {
+    border-left-color: #0d9488;
+    background-color: rgba(13, 148, 136, 0.05);
+}
+.admonition-abstract .admonition-title,
+.admonition-summary .admonition-title,
+.admonition-tldr .admonition-title {
+    color: #0f766e;
+}
+.admonition-abstract .admonition-title::before,
+.admonition-summary .admonition-title::before,
+.admonition-tldr .admonition-title::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%230f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>');
+}
+
+/* 3. Info, Todo (Cyan/Blue) */
+.admonition-info,
+.admonition-todo {
+    border-left-color: #0ea5e9;
+    background-color: rgba(14, 165, 233, 0.05);
+}
+.admonition-info .admonition-title,
+.admonition-todo .admonition-title {
+    color: #0369a1;
+}
+.admonition-info .admonition-title::before,
+.admonition-todo .admonition-title::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%230369a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>');
+}
+
+/* 4. Tip, Hint, Important (Magenta/Purple) */
+.admonition-tip,
+.admonition-hint,
+.admonition-important {
+    border-left-color: #8b5cf6;
+    background-color: rgba(139, 92, 246, 0.05);
+}
+.admonition-tip .admonition-title,
+.admonition-hint .admonition-title,
+.admonition-important .admonition-title {
+    color: #6d28d9;
+}
+.admonition-tip .admonition-title::before,
+.admonition-hint .admonition-title::before,
+.admonition-important .admonition-title::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%236d28d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14 1-4 1-4s1.5 2 1.5 4c0 1 .5 1.62 1 3a2.5 2.5 0 0 0 2.5 2.5"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M5 12H3"/><path d="M21 12h-2"/><path d="M18.36 5.64l-1.41 1.41"/><path d="M7.05 18.36l-1.41 1.41"/><path d="M18.36 18.36l-1.41-1.41"/><path d="M7.05 5.64L5.64 7.05"/></svg>');
+}
+
+/* 5. Success, Check, Done (Green) */
+.admonition-success,
+.admonition-check,
+.admonition-done {
+    border-left-color: #10b981;
+    background-color: rgba(16, 185, 129, 0.05);
+}
+.admonition-success .admonition-title,
+.admonition-check .admonition-title,
+.admonition-done .admonition-title {
+    color: #047857;
+}
+.admonition-success .admonition-title::before,
+.admonition-check .admonition-title::before,
+.admonition-done .admonition-title::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23047857" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>');
+}
+
+/* 6. Question, Help, Faq (Yellow/Orange) */
+.admonition-question,
+.admonition-help,
+.admonition-faq {
+    border-left-color: #eab308;
+    background-color: rgba(234, 179, 8, 0.05);
+}
+.admonition-question .admonition-title,
+.admonition-help .admonition-title,
+.admonition-faq .admonition-title {
+    color: #a16207;
+}
+.admonition-question .admonition-title::before,
+.admonition-help .admonition-title::before,
+.admonition-faq .admonition-title::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23a16207" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>');
+}
+
+/* 7. Warning, Caution, Attention (Orange/Coral) */
+.admonition-warning,
+.admonition-caution,
+.admonition-attention {
+    border-left-color: #f97316;
+    background-color: rgba(249, 115, 22, 0.05);
+}
+.admonition-warning .admonition-title,
+.admonition-caution .admonition-title,
+.admonition-attention .admonition-title {
+    color: #c2410c;
+}
+.admonition-warning .admonition-title::before,
+.admonition-caution .admonition-title::before,
+.admonition-attention .admonition-title::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23c2410c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>');
+}
+
+/* 8. Failure, Fail, Missing (Red) */
+.admonition-failure,
+.admonition-fail,
+.admonition-missing {
+    border-left-color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.05);
+}
+.admonition-failure .admonition-title,
+.admonition-fail .admonition-title,
+.admonition-missing .admonition-title {
+    color: #b91c1c;
+}
+.admonition-failure .admonition-title::before,
+.admonition-fail .admonition-title::before,
+.admonition-missing .admonition-title::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23b91c1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>');
+}
+
+/* 9. Danger, Error, Bug (Dark Red) */
+.admonition-danger,
+.admonition-error,
+.admonition-bug {
+    border-left-color: #dc2626;
+    background-color: rgba(220, 38, 38, 0.05);
+}
+.admonition-danger .admonition-title,
+.admonition-error .admonition-title,
+.admonition-bug .admonition-title {
+    color: #991b1b;
+}
+.admonition-danger .admonition-title::before,
+.admonition-error .admonition-title::before,
+.admonition-bug .admonition-title::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M17.47 9c1.93-.2 3.53-1.9 3.53-4"/></svg>');
+}
+
+/* 10. Example (Slate/Purple) */
+.admonition-example {
+    border-left-color: #64748b;
+    background-color: rgba(100, 116, 139, 0.05);
+}
+.admonition-example .admonition-title {
+    color: #334155;
+}
+.admonition-example .admonition-title::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>');
+}
+
+/* 11. Quote, Cite (Gray) */
+.admonition-quote,
+.admonition-cite {
+    border-left-color: #9ca3af;
+    background-color: rgba(156, 163, 175, 0.05);
+}
+.admonition-quote .admonition-title,
+.admonition-cite .admonition-title {
+    color: #4b5563;
+}
+.admonition-quote .admonition-title::before,
+.admonition-cite .admonition-title::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>');
 }
