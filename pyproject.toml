@@ -1,6 +1,6 @@
 [project]
 name = "ebook-maker"
-version = "0.1.0"
+version = "0.1.1"
 description = "EPUB generator from Markdown files"
 readme = "README.md"
 authors = [
