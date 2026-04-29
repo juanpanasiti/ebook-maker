@@ -312,7 +312,7 @@ div[align='left'] {
     color: #2563eb;
 }
 .admonition-note .admonition-title::before {
-    content: '✎';
+    content: '[i] ';
 }
 
 /* 2. Abstract, Summary, Tldr (Teal) */
@@ -330,7 +330,7 @@ div[align='left'] {
 .admonition-abstract .admonition-title::before,
 .admonition-summary .admonition-title::before,
 .admonition-tldr .admonition-title::before {
-    content: '▤';
+    content: '[=] ';
 }
 
 /* 3. Info, Todo (Cyan/Blue) */
@@ -345,7 +345,7 @@ div[align='left'] {
 }
 .admonition-info .admonition-title::before,
 .admonition-todo .admonition-title::before {
-    content: 'ⓘ';
+    content: '[i] ';
 }
 
 /* 4. Tip, Hint, Important (Magenta/Purple) */
@@ -363,7 +363,7 @@ div[align='left'] {
 .admonition-tip .admonition-title::before,
 .admonition-hint .admonition-title::before,
 .admonition-important .admonition-title::before {
-    content: '★';
+    content: '[*] ';
 }
 
 /* 5. Success, Check, Done (Green) */
@@ -381,7 +381,7 @@ div[align='left'] {
 .admonition-success .admonition-title::before,
 .admonition-check .admonition-title::before,
 .admonition-done .admonition-title::before {
-    content: '✔';
+    content: '[v] ';
 }
 
 /* 6. Question, Help, Faq (Yellow/Orange) */
@@ -418,7 +418,7 @@ div[align='left'] {
 .admonition-warning .admonition-title::before,
 .admonition-caution .admonition-title::before,
 .admonition-attention .admonition-title::before {
-    content: '⚠';
+    content: '[!] ';
 }
 
 /* 8. Failure, Fail, Missing (Red) */
@@ -436,7 +436,7 @@ div[align='left'] {
 .admonition-failure .admonition-title::before,
 .admonition-fail .admonition-title::before,
 .admonition-missing .admonition-title::before {
-    content: '✘';
+    content: '[x] ';
 }
 
 /* 9. Danger, Error, Bug (Dark Red) */
@@ -467,7 +467,7 @@ div[align='left'] {
     color: #334155;
 }
 .admonition-example .admonition-title::before {
-    content: '❖';
+    content: '[#] ';
 }
 
 /* 11. Quote, Cite (Gray) */
@@ -482,7 +482,7 @@ div[align='left'] {
 }
 .admonition-quote .admonition-title::before,
 .admonition-cite .admonition-title::before {
-    content: '❞';
+    content: '["] ';
 }
 
 /* =========================================================
@@ -519,10 +519,6 @@ ul.task-list input[type="checkbox"] {
 ul.task-list input[type="checkbox"]:checked {
     background-color: var(--accent-main, #6366f1);
     border-color: var(--accent-main, #6366f1);
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>');
-    background-size: 75%;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 ul.task-list input[type="checkbox"]:checked + del {
