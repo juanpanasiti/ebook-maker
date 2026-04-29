@@ -1,6 +1,6 @@
 # Ebook Maker
 
-Ebook Maker is a terminal application built in Python that converts Obsidian notes into EPUB format using Pandoc. It provides an interactive and colorful command-line interface to scan your Obsidian vault for notes, manage their metadata, generate styled EPUB ebooks, and optionally send them directly to your Kindle via email.
+Ebook Maker is a terminal application built in Python that converts Obsidian notes into EPUB and PDF formats using Pandoc and WeasyPrint. It provides an interactive and colorful command-line interface to scan your Obsidian vault for notes, manage their metadata, generate styled ebooks, and optionally send EPUB files directly to your Kindle via email.
 
 ## Features
 
@@ -14,6 +14,7 @@ Ebook Maker is a terminal application built in Python that converts Obsidian not
   - Automatic Table of Contents (up to heading level 2).
   - Line numbers in code blocks via a Lua filter.
   - Embedded images resolved from the note's directory.
+- **PDF Generation**: Converts the same Markdown sources into an A4 PDF using Pandoc to HTML5 plus WeasyPrint, reusing the project CSS and Lua filters.
 - **Send to Kindle**: Optionally send the generated EPUB directly to your Kindle device via email (SMTP), with Gmail App Password support.
 - **Interactive UI**: A rich terminal interface with menus, colors, emojis, and loading animations powered by [Rich](https://github.com/Textualize/rich) and [Questionary](https://github.com/tmbo/questionary).
 - **Pydantic Validation**: All configuration and metadata is validated using Pydantic models.
@@ -86,10 +87,10 @@ Or from the project directory using the dev script:
 src/ebook_maker/
 ├── core/           # Settings and Pydantic models
 ├── scanner/        # Obsidian vault scanning and metadata management
-├── converter/      # EPUB generation using Pandoc
+├── converter/      # EPUB generation with Pandoc and PDF generation with Pandoc + WeasyPrint
 ├── sender/         # Send EPUB to Kindle via email
 ├── ui/             # Terminal menus and display (Rich + Questionary)
-├── assets/         # CSS stylesheet and Lua filter for EPUB styling
+├── assets/         # CSS stylesheets and Lua filters used by EPUB and PDF generation
 └── main.py         # Application entry point
 ```
 
