@@ -1,20 +1,70 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+# Documentation reference
+docs:
+  architecture_file: architecture.md
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+# Project structure
+project:
+  name: ebook-maker
+  description: "EPUB and PDF generator from Markdown files for Obsidian vaults"
+  source_dir: src/ebook_maker
+  test_dir: tests
+
+# Development commands (using uv)
+scripts:
+  test: uv run pytest tests/ --cov=src/ebook_maker --cov-report=term-missing
+  test-fast: uv run pytest tests/ -q
+  sync: uv sync
+  install: ./install.sh
+  run: ./run.sh
+
+# Project context for artifact generation
+context: |
+  ## Technology Stack
+  - Language: Python 3.14+
+  - Dependency management: uv
+  - CLI framework: Rich (console UI) + Questionary (menus)
+  - Document conversion: Pandoc (via pypandoc)
+  - PDF rendering: WeasyPrint
+  - Configuration: pydantic + pydantic-settings
+  - Testing: pytest + pytest-cov
+  - Validation: Pydantic v2
+  
+  ## Architecture
+  The application follows a layered architecture:
+  - `core/`: domain models (Pydantic) and settings loading
+  - `scanner/`: Obsidian vault scanning and metadata management
+  - `converter/`: EPUB and PDF generation pipelines
+  - `sender/`: SMTP-based Kindle email delivery
+  - `ui/`: Terminal UI with Rich and Questionary
+  - `assets/`: CSS stylesheets and Lua filters for document styling
+  - `main.py`: CLI entry point with interactive navigation loop
+  
+  ## Code Conventions
+  - Use snake_case for functions/variables, PascalCase for classes
+  - Use modern type hints: str | None instead of Optional[str]
+  - All domain data in Pydantic models (core/models.py)
+  - All configuration via core/settings.py (not direct os.environ)
+  - Functional separation: UI/conversion/scanning are separate layers
+  - Mock external integrations in tests (Pandoc, SMTP, CLI prompts)
+
+# Per-artifact rules
+rules:
+  proposal:
+    - Ground decisions in the actual codebase architecture
+    - Always mention how changes fit into the layered structure
+    - Include explicit non-goals and constraints
+  design:
+    - Specify which modules/layers are affected
+    - Clarify Pydantic model changes if applicable
+    - Detail how configuration flows through settings.py
+  tasks:
+    - Include one implementation task per distinct code change
+    - Reference specific file paths (src/ebook_maker/...)
+    - Break tasks into chunks of max 2 hours of focused work
+    - Mark tasks that require tests or documentation updates
+  specs:
+    - Focus on external behavior and API contracts
+    - Include examples of configuration and usage
+    - Clarify any new CLI interactions or menu flows
