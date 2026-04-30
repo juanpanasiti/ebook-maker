@@ -90,25 +90,24 @@ def prompt_select_note(entries: list[VaultEntry], show_back: bool = False) -> Op
 def prompt_note_action(note: Note, settings: Settings) -> Optional[str]:
     """Asks the user what to do with the selected note."""
     choices = [
-        questionary.Choice("🔍 View Metadata", "view"),
-        questionary.Choice("✏️  Edit Metadata", "edit"),
         questionary.Choice("🚀 Generate EPUB", "generate"),
         questionary.Choice("📄 Generate PDF (A4)", "generate_pdf"),
     ]
 
-    # Only show 'Open EPUB location' if the EPUB file exists
+    # Only show the shared location action once at least one output exists.
     epub_path = settings.epub_destination / get_epub_output_filename(note)
-    if epub_path.exists():
-        choices.append(questionary.Choice("📂 Open EPUB Location", "open_location"))
-
-    # Only show 'Open PDF location' if the PDF file exists
     pdf_path = settings.epub_destination / get_pdf_output_filename(note)
-    if pdf_path.exists():
-        choices.append(questionary.Choice("📂 Open PDF Location", "open_pdf_location"))
+    if epub_path.exists() or pdf_path.exists():
+        choices.append(questionary.Choice("📂 Open EPUB/PDF Location", "open_location"))
+
+    choices.extend([
+        questionary.Choice("🔍 View Metadata", "view"),
+        questionary.Choice("✏️  Edit Metadata", "edit"),
+    ])
 
     # Only show the option to send to Kindle if the configuration is active
     if settings.kindle_email and settings.smtp_user and settings.smtp_password:
-        choices.append(questionary.Choice("📧 Send EPUB to Kindle", "send"))
+        choices.insert(2, questionary.Choice("📧 Send EPUB to Kindle", "send"))
 
     choices.append(questionary.Choice("🔙 Back to Note Selection", "back"))
 

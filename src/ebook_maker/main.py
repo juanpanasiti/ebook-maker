@@ -13,7 +13,7 @@ from ebook_maker.ui.menu import (
     prompt_edit_metadata
 )
 from ebook_maker.converter.converter import generate_epub, get_epub_output_filename
-from ebook_maker.converter.pdf_converter import generate_pdf, get_pdf_output_filename
+from ebook_maker.converter.pdf_converter import generate_pdf
 from ebook_maker.sender.email_sender import send_epub_to_kindle
 
 
@@ -96,15 +96,8 @@ def main():
             
             elif action == "open_location":
                 import subprocess
-                epub_path = settings.epub_destination / get_epub_output_filename(selected_note)
-                subprocess.Popen(["xdg-open", str(epub_path.parent)])
-                console.print(f"📂 [bold green]Opened:[/bold green] {epub_path.parent}\n")
-
-            elif action == "open_pdf_location":
-                import subprocess
-                pdf_path = settings.epub_destination / get_pdf_output_filename(selected_note)
-                subprocess.Popen(["xdg-open", str(pdf_path.parent)])
-                console.print(f"📂 [bold green]Opened:[/bold green] {pdf_path.parent}\n")
+                subprocess.Popen(["xdg-open", str(settings.epub_destination)])
+                console.print(f"📂 [bold green]Opened:[/bold green] {settings.epub_destination}\n")
 
             elif action == "generate_pdf":
                 try:
